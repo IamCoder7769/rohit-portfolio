@@ -16,7 +16,7 @@ export const AboutSection: React.FC = () => {
           >
             <div className="relative h-[420px] overflow-hidden">
               <img
-                src="/src/assets/images/IMG-20240110-WA0168.jpg"
+                src="/IMG-20240110-WA0168.jpg"
                 alt={`${CANDIDATE_PROFILE.name} - ${CANDIDATE_PROFILE.title}`}
                 className="w-full h-auto object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-700"
               />
