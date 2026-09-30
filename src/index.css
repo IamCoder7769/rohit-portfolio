@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+:root {
+  --font-heading: Arial, Helvetica, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
+
+  --bg-main: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --chip-bg: #F9FAFB;
+  --border-main: #E5E7EB;
+  --border-subtle: #F3F4F6;
+  --primary-accent: #ccc5b9;
+  --primary-hover: #b5aea8;
+  --primary-text: #111827;
+  --gold-accent: #EC4899;
+  --gold-hover: #DB2777;
+  --text-main: #111827;
+  --text-body: #4B5563;
+  --text-muted: #9CA3AF;
+  --pill-bg: #F3F4F6;
+  --pill-border: #E5E7EB;
+  --pill-text: #374151;
+  --chip-border: #E5E7EB;
+  --icon-box-bg: #F9FAFB;
+}
+
+/* ============================================================================
+   BASE
+   ============================================================================ */
+@layer base {
+  *, ::before, ::after { font-family: Arial, Helvetica, sans-serif; }
+
+  html, body {
+    font-family: Arial, Helvetica, sans-serif !important;
+    background-color: var(--bg-main);
+    background-image: none !important;
+    color: var(--text-main);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-heading {
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace !important;
+  }
+}
+
+.font-serif { font-family: Arial, Helvetica, sans-serif !important; }
+.font-sans  { font-family: Arial, Helvetica, sans-serif !important; }
+
+/* ============================================================================
+   CANVAS
+   ============================================================================ */
+.app-canvas-bg {
+  background-color: var(--bg-main) !important;
+  background-image: none !important;
+}
+
+/* ============================================================================
+   THEME-DRIVEN GLOBAL STYLES
+   All accent/bg/text colors driven by CSS variables set by ThemeContext
+   ============================================================================ */
+
+/* Page background */
+body, #root, .app-canvas-bg {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main);
+}
+
+/* Section headings */
+section h2, section h3 {
+  color: var(--text-main);
+}
+
+/* Cards */
+.theme-card {
+  background-color: var(--bg-card);
+  border-color: var(--border-main);
+  color: var(--text-body);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.theme-card:hover {
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.13);
+  transform: translateY(-4px);
+}
+
+/* Primary accent — text, icons, labels */
+.accent-text { color: var(--primary-accent) !important; }
+.accent-bg   { background-color: var(--primary-accent) !important; color: var(--primary-text) !important; }
+.accent-border { border-color: var(--primary-accent) !important; }
+
+/* ============================================================================
+   BG-WHITE CARDS — use var(--bg-card) so dark themes work
+   ============================================================================ */
+:not(#resume-paper):not(#resume-paper *) > .bg-white,
+.bg-white:not(#resume-paper):not(#resume-paper *) {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-body) !important;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease !important;
+}
+
+:not(#resume-paper):not(#resume-paper *) > [class*="bg-white/"],
+[class*="bg-white/"]:not(#resume-paper):not(#resume-paper *) {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-body) !important;
+}
+
+/* Card hover */
+.bg-white:not(#resume-paper):hover {
+  border-color: var(--primary-accent) !important;
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.13) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Card headings */
+.bg-white:not(#resume-paper) h2,
+.bg-white:not(#resume-paper) h3,
+.bg-white:not(#resume-paper) h4 {
+  color: var(--text-main) !important;
+}
+
+/* Card body text */
+.bg-white:not(#resume-paper) p,
+.bg-white:not(#resume-paper) li {
+  color: var(--text-body) !important;
+}
+
+/* ============================================================================
+   ACCENT COLOR — all hardcoded accent usages driven by CSS var
+   ============================================================================ */
+
+/* text-[#ccc5b9] and similar accent text */
+[class*="text-[#ccc5b9]"],
+[class*="text-[#4d652f]"],
+[class*="text-[#3b472e]"] {
+  color: var(--primary-accent) !important;
+}
+
+/* bg-[#ccc5b9] buttons/badges */
+[class*="bg-[#ccc5b9]"] {
+  background-color: var(--primary-accent) !important;
+  color: var(--primary-text) !important;
+}
+
+/* hover:bg-[#b5aea8] */
+[class*="hover:bg-[#b5aea8]"]:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+/* hover:border-[#ccc5b9] */
+[class*="hover:border-[#ccc5b9]"]:hover {
+  border-color: var(--primary-accent) !important;
+}
+
+/* hover:bg-[#ccc5b9] */
+[class*="hover:bg-[#ccc5b9]"]:hover {
+  background-color: var(--primary-accent) !important;
+  color: var(--primary-text) !important;
+}
+
+/* border-[#ccc5b9] */
+[class*="border-[#ccc5b9]"] {
+  border-color: var(--primary-accent) !important;
+}
+
+/* Old olive accent overrides */
+[class*="bg-[#4d652f]"] { background-color: var(--primary-accent) !important; color: var(--primary-text) !important; }
+[class*="hover:bg-[#3f5425]"]:hover { background-color: var(--primary-hover) !important; }
+[class*="hover:text-[#4d652f]"]:hover { color: var(--primary-hover) !important; }
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+#main-navigation {
+  background-color: var(--bg-card) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--border-main) !important;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,0.06) !important;
+}
+
+#main-navigation a,
+#main-navigation button { color: var(--text-body); }
+
+#main-navigation #theme-toggle-btn {
+  background-color: var(--chip-bg) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-body) !important;
+}
+
+#nav-brand-logo span.font-extrabold { color: var(--text-main) !important; }
+
+#mobile-drawer-menu {
+  background-color: var(--bg-card) !important;
+  border-bottom: 1px solid var(--border-main) !important;
+  color: var(--text-main) !important;
+}
+
+/* ============================================================================
+   PROCESS SECTION
+   ============================================================================ */
+#process [class*="bg-[#f9faf5]"] {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-body) !important;
+  transition: box-shadow 0.25s ease, transform 0.25s ease !important;
+}
+
+#process [class*="bg-[#f9faf5]"]:hover {
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.13) !important;
+  transform: translateY(-4px) !important;
+}
+
+#process [class*="bg-[#f9faf5]"] h3 { color: var(--text-main) !important; }
+#process [class*="bg-[#f9faf5]"] p  { color: var(--text-body) !important; }
+
+/* ============================================================================
+   INNER CHIPS & SUB-BOXES
+   ============================================================================ */
+[class*="bg-[#f8faf2]"]:not(#resume-paper *),
+[class*="bg-[#f3f6ea]"]:not(#resume-paper *),
+[class*="bg-[#f9faf5]"]:not(#resume-paper *) {
+  background-color: var(--chip-bg) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-body) !important;
+}
+
+/* ============================================================================
+   BORDERS
+   ============================================================================ */
+[class*="border-[#dde2be]"]:not(#resume-paper *),
+[class*="border-[#cfd6aa]"]:not(#resume-paper *),
+[class*="border-[#edf1d3]"]:not(#resume-paper *),
+[class*="border-[#e2e7cb]"]:not(#resume-paper *) {
+  border-color: var(--border-main) !important;
+}
+
+/* ============================================================================
+   PILLS & TECH TAGS
+   ============================================================================ */
+[class*="bg-[#e1e6bd]"]:not(#resume-paper *),
+[class*="bg-[#eef1d6]"]:not(#resume-paper *),
+[class*="bg-[#edf2d7]"]:not(#resume-paper *) {
+  background-color: var(--pill-bg) !important;
+  border-color: var(--pill-border) !important;
+  color: var(--pill-text) !important;
+}
+
+/* ============================================================================
+   CONTACT
+   ============================================================================ */
+#contact h4 { color: var(--text-main) !important; }
+#contact ul a, #contact ul li { color: var(--text-body) !important; }
+#contact ul a:hover { color: var(--primary-accent) !important; }
+
+/* ============================================================================
+   FORM INPUTS
+   ============================================================================ */
+input, textarea, select {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-main) !important;
+  color: var(--text-main) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-accent) !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(204,197,185,0.2) !important;
+}
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--chip-bg); }
+::-webkit-scrollbar-thumb { background: var(--border-main); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-accent); }
+
+/* ============================================================================
+   MARQUEE
+   ============================================================================ */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ============================================================================
+   FLOAT
+   ============================================================================ */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-float         { animation: floatGentle 5s ease-in-out infinite; }
+.animate-float-delayed { animation: floatGentle 6s ease-in-out infinite; animation-delay: 2.5s; }
+
+.ambient-glow-green,
+.ambient-glow-tangerine { display: none !important; }
+
+/* ============================================================================
+   DOT GRID
+   ============================================================================ */
+.bg-grid-subtle {
+  background-image: radial-gradient(var(--border-main) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
