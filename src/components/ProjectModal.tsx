@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion } from 'motion/react';
 import {
   X,
   ExternalLink,
@@ -42,7 +41,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         inset: 0,
         zIndex: 9999,
         backgroundColor: 'rgba(9,9,11,0.75)',
-        backdropFilter: 'blur(4px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -50,12 +48,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       }}
       onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <motion.div
+      <div
         id="project-modal-card"
-        initial={{ opacity: 0, scale: 0.95, y: 16 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 16 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
         style={{ maxHeight: 'calc(100vh - 2rem)' }}
         className="bg-white rounded-2xl border border-zinc-200 shadow-2xl w-full max-w-2xl flex flex-col overflow-hidden text-zinc-900"
       >
@@ -195,7 +189,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               Close Window
             </button>
           </div>
-      </motion.div>
+      </div>
     </div>,
     document.body
   );

@@ -41,7 +41,7 @@ export default function App() {
         {/* Top Navigation with Hexagon Logo & Action button */}
         <Navbar onOpenResume={handleOpenResume} />
 
-        <main className="flex-grow relative z-10">
+        <main className="flex-grow">
           {/* Hero Section: Editorial Headline, Workspace Setup Image & CV Stack */}
           <Hero onOpenResume={handleOpenResume} />
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { X, Printer, Download, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { X, Printer } from 'lucide-react';
 import {
   CANDIDATE_PROFILE,
   SKILL_CATEGORIES,
@@ -16,28 +16,33 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  const handlePrint = () => {
-    window.print();
-  };
+  const handlePrint = () => { window.print(); };
 
-  return (
-    <AnimatePresence>
+  return createPortal(
+    <div
+      id="resume-modal-backdrop"
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        backgroundColor: 'rgba(9,9,11,0.75)',
+        overflowY: 'auto',
+      }}
+      onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
       <div
-        id="resume-modal-backdrop"
-        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-zinc-950/70 backdrop-blur-xs overflow-y-auto"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
+        style={{ minHeight: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}
+        onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
       >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          transition={{ duration: 0.2 }}
-          className="bg-white rounded-2xl border border-zinc-200 shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden text-zinc-900 my-auto"
-        >
+      <div
+        className="bg-white rounded-2xl border border-zinc-200 shadow-2xl max-w-4xl w-full flex flex-col overflow-hidden text-zinc-900"
+        style={{ maxHeight: 'calc(100vh - 2rem)' }}
+      >
           {/* Top Bar with actions */}
           <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-200 bg-zinc-50 print:hidden">
             <div className="flex items-center space-x-2">
@@ -220,8 +225,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </ul>
             </div>
           </div>
-        </motion.div>
       </div>
-    </AnimatePresence>
+      </div>
+    </div>,
+    document.body
   );
 };

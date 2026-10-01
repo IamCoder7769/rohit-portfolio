@@ -66,7 +66,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   return (
     <header
       id="main-navigation"
-      className="sticky top-0 z-40 w-full bg-white/98 backdrop-blur-md border-b border-gray-100 shadow-sm"
+      className="sticky top-0 z-40 w-full border-b border-gray-100 shadow-sm"
+      style={{ backgroundColor: 'var(--bg-card)' }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         {/* Brand */}
